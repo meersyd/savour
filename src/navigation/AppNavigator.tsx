@@ -1,3 +1,4 @@
+import { AddEditRecipeScreen } from '../screens/AddEditRecipeScreen';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../types/recipe';
@@ -35,6 +36,13 @@ export function AppNavigator() {
           name="RecipeDetail"
           component={RecipeDetailScreen}
           options={{ title: 'From your collection' }}
+        />
+        <Stack.Screen
+          name="RecipeEditor"
+          component={AddEditRecipeScreen}
+          options={({ route }) => ({
+            title: route.params?.recipeId ? 'Edit recipe' : 'New recipe',
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

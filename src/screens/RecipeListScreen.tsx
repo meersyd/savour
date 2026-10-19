@@ -53,6 +53,12 @@ export function RecipeListScreen({
               </Text>
             </View>
             <CategoryPicker value={categoryId} onChange={setCategoryId} all />
+            <Button
+              label="Add a recipe"
+              icon="add"
+              disabled={loading || !!error}
+              onPress={() => navigation.navigate('RecipeEditor')}
+            />
             {error && (
               <View accessibilityRole="alert" style={styles.error}>
                 <Text style={shared.error}>{error}</Text>

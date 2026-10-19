@@ -1,3 +1,4 @@
+import { resolveImageUri } from '../services/recipeImages';
 import type { ImageSourcePropType } from 'react-native';
 const sampleImages: Record<string, ImageSourcePropType> = {
   'sample:avocado-toast': require('../../assets/images/avocado-toast.jpg'),
@@ -8,5 +9,5 @@ const sampleImages: Record<string, ImageSourcePropType> = {
   'sample:iced-latte': require('../../assets/images/iced-latte.jpg'),
 };
 export function recipeImage(uri: string): ImageSourcePropType {
-  return sampleImages[uri] ?? { uri };
+  return sampleImages[uri] ?? { uri: resolveImageUri(uri) };
 }

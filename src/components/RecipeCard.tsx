@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import type { Recipe } from '../types/recipe';
 import categories from '../data/recipetypes.json';
 import { colors } from '../constants/theme';

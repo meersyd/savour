@@ -1,3 +1,4 @@
+import { Button } from '../components/Button';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -46,6 +47,12 @@ export function RecipeDetailScreen({
               </View>
             ))}
           </View>
+          <Button
+            label="Edit recipe"
+            icon="create-outline"
+            variant="secondary"
+            onPress={() => navigation.navigate('RecipeEditor', { recipeId: recipe.id })}
+          />
           <Text style={shared.heading}>Ingredients</Text>
           <View style={styles.ingredients}>
             {recipe.ingredients.map((ingredient, index) => (
