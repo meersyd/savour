@@ -46,3 +46,7 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# Python packaging helper cache
+__pycache__/
+*.pyc
