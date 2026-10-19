@@ -1,5 +1,6 @@
+import { useRef, useState } from 'react';
 import { Button } from '../components/Button';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useRecipes } from '../hooks/useRecipes';
@@ -12,8 +13,56 @@ export function RecipeDetailScreen({
   route,
   navigation,
 }: NativeStackScreenProps<RootStackParamList, 'RecipeDetail'>) {
-  const { recipes } = useRecipes();
+  const { recipes, deleteRecipe } = useRecipes();
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const deletionPending = useRef(false);
   const recipe = recipes.find((r) => r.id === route.params.recipeId);
+  function confirmDelete() {
+    if (!recipe || deletionPending.current) return;
+    deletionPending.current = true;
+    const id = recipe.id;
+    Alert.alert(
+      'Delete this recipe?',
+      `“${recipe.name}” will be removed from your collection. This cannot be undone.`,
+      [
+        {
+          text: 'Keep recipe',
+          style: 'cancel',
+          onPress: () => {
+            deletionPending.current = false;
+          },
+        },
+        {
+          text: 'Delete recipe',
+          style: 'destructive',
+          onPress: () => {
+            setDeleting(true);
+            setDeleteError(null);
+            void deleteRecipe(id)
+              .then(() => navigation.popToTop())
+              .catch((cause: unknown) => {
+                setDeleteError(
+                  cause instanceof Error
+                    ? cause.message
+                    : 'Could not delete the recipe. Please retry.',
+                );
+              })
+              .finally(() => {
+                setDeleting(false);
+                deletionPending.current = false;
+              });
+          },
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {
+          deletionPending.current = false;
+        },
+      },
+    );
+  }
   if (!recipe)
     return (
       <SafeAreaView style={shared.page} edges={['bottom', 'left', 'right']}>
@@ -49,6 +98,7 @@ export function RecipeDetailScreen({
           </View>
           <Button
             label="Edit recipe"
+            disabled={deleting}
             icon="create-outline"
             variant="secondary"
             onPress={() => navigation.navigate('RecipeEditor', { recipeId: recipe.id })}
@@ -71,6 +121,18 @@ export function RecipeDetailScreen({
               <Text style={[shared.body, styles.flex]}>{step}</Text>
             </View>
           ))}
+          {deleteError && (
+            <Text accessibilityRole="alert" style={shared.error}>
+              {deleteError}
+            </Text>
+          )}
+          <Button
+            label={deleting ? 'Deleting…' : 'Delete recipe'}
+            icon="trash-outline"
+            variant="danger"
+            loading={deleting}
+            onPress={confirmDelete}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
