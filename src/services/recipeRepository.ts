@@ -1,6 +1,6 @@
 import samples from '../data/sampleRecipes.json';
 import type { Recipe, RecipeInput } from '../types/recipe';
-import { isRecipe, validateRecipe } from '../utils/validation';
+import { isRecipe, isStoredImageReference, validateRecipe } from '../utils/validation';
 export const STORAGE_KEY = '@savour/recipes/v1';
 export interface StorageAdapter {
   getItem(key: string): Promise<string | null>;
@@ -58,7 +58,7 @@ export class RecipeRepository {
       cookTime: String(input.cookTime),
       servings: String(input.servings),
     });
-    if (Object.keys(errors).length)
+    if (Object.keys(errors).length || !isStoredImageReference(input.imageUri))
       throw new Error('Please correct the recipe fields before saving.');
   }
   load(): Promise<Recipe[]> {

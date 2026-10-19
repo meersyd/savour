@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from '@jest/globals';
 import {
   RecipeRepository,
   STORAGE_KEY,
@@ -125,4 +125,13 @@ describe('form validation', () => {
     });
     expect(Object.keys(errors)).toHaveLength(8);
   });
+});
+
+it('rejects corrupt image paths without exposing them to the renderer', async () => {
+  const broken = { ...samples[0], imageUri: 'local:../outside.jpg' };
+  expect(isRecipe(broken)).toBe(false);
+  const raw = JSON.stringify({ version: 1, recipes: [broken] });
+  const s = setup(raw);
+  await expect(s.repo.load()).rejects.toThrow('damaged format');
+  expect(s.raw()).toBe(raw);
 });

@@ -1,3 +1,4 @@
+import samples from '../data/sampleRecipes.json';
 import categories from '../data/recipetypes.json';
 import type { FormErrors, Recipe, RecipeFormValues, RecipeInput } from '../types/recipe';
 export function validateRecipe(values: RecipeFormValues): FormErrors {
@@ -29,6 +30,12 @@ export function toRecipeInput(values: RecipeFormValues): RecipeInput {
     servings: Number(values.servings),
   };
 }
+export function isStoredImageReference(uri: string): boolean {
+  return (
+    samples.some((recipe) => recipe.imageUri === uri) ||
+    /^local:[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$/.test(uri)
+  );
+}
 export function isRecipe(value: unknown): value is Recipe {
   if (!value || typeof value !== 'object') return false;
   const r = value as Record<string, unknown>;
@@ -41,7 +48,7 @@ export function isRecipe(value: unknown): value is Recipe {
     typeof r.id === 'string' &&
     r.id.length > 0 &&
     typeof r.imageUri === 'string' &&
-    r.imageUri.length > 0 &&
+    isStoredImageReference(r.imageUri) &&
     categories.some((c) => c.id === r.categoryId) &&
     ['ingredients', 'steps'].every(
       (k) =>

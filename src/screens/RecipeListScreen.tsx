@@ -21,8 +21,8 @@ export function RecipeListScreen({
 }: NativeStackScreenProps<RootStackParamList, 'Recipes'>) {
   const { recipes, loading, error, refresh } = useRecipes();
   const [categoryId, setCategoryId] = useState('all');
-  const { width } = useWindowDimensions();
-  const columns = width >= 700 ? 2 : 1;
+  const { width, fontScale } = useWindowDimensions();
+  const columns = width >= 700 && fontScale < 1.5 ? 2 : 1;
   const visible = useMemo(
     () => recipes.filter((r) => categoryId === 'all' || r.categoryId === categoryId),
     [recipes, categoryId],

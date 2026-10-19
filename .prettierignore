@@ -3,3 +3,6 @@ node_modules
 dist
 submission
 package-lock.json
+
+android
+ios
