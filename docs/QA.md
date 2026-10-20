@@ -1,6 +1,6 @@
 # Verification report
 
-Executed on 19 October 2026 using Node 24.22.0 and Expo SDK 58.
+Revalidated on 20 October 2026 using Node 24.22.0 and Expo SDK 57 after correcting compatibility with store-distributed Expo Go.
 
 ## Automated and configuration checks
 
@@ -8,7 +8,7 @@ Executed on 19 October 2026 using Node 24.22.0 and Expo SDK 58.
 - `npm run lint`: passed, no warnings.
 - `npm run format:check`: passed.
 - `npm test`: 33 tests passed in three Jest suites.
-- `npx expo-doctor`: 20/20 checks passed.
+- `npx expo-doctor`: 21/21 checks passed.
 - Android and iOS production bundle exports: passed.
 - `npx expo prebuild --no-install`: both native projects generated successfully.
 

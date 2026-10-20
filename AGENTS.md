@@ -28,7 +28,7 @@ Run lint and typecheck before declaring any task done.
 - This assessment explicitly requires **React Navigation Native Stack**. Do not replace it with Expo Router.
 - The typed navigator lives in `src/navigation/AppNavigator.tsx`; screen parameters are in `src/types/recipe.ts`.
 - Run `npm run check` before submitting changes. Tests use Expo's Jest preset and React Native Testing Library.
-- Keep native modules compatible with Expo SDK 58. Core modules are supported in a compatible Expo Go; a native build is needed to verify Savour's own app identity and permission strings.
+- Keep native modules compatible with Expo SDK 57. Core modules are supported in a compatible Expo Go; a native build is needed to verify Savour's own app identity and permission strings.
 
 ## Building with EAS
 

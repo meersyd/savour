@@ -23,7 +23,7 @@ Built for the React Native Application Developer assessment at FOURTITUDE ASIA.
 
 | Area        | Technology                                                          |
 | ----------- | ------------------------------------------------------------------- |
-| Framework   | Expo SDK 58, React Native 0.88, React 19.3                          |
+| Framework   | Expo SDK 57, React Native 0.86, React 19.2                          |
 | Language    | TypeScript 6, strict mode                                           |
 | Navigation  | React Navigation 7 Native Stack                                     |
 | State       | React Context and custom `useRecipes` hook                          |
@@ -49,7 +49,9 @@ If you do not use `nvm`, install Node 24 LTS directly before running `npm ci`. N
 
 ### Run with Expo Go
 
-A development build is **not required for the core application**: its native modules are available in a compatible **Expo Go for SDK 58**. Install the compatible Expo Go version on your device, start Metro with `npm start`, and scan the QR code. The computer and phone normally need to share a network for development.
+This project targets SDK 57 because SDK 58 is not yet supported by the store version of Expo Go as of 19 October 2026. See the [Expo release notes](https://expo.dev/changelog/sdk-58).
+
+A development build is **not required for the core application**: its native modules are available in a compatible **Expo Go for SDK 57**. Install the compatible Expo Go version on your device, start Metro with `npm start`, and scan the QR code. The computer and phone normally need to share a network for development.
 
 - **Android:** scan the QR code in Expo Go, or press `a` in Metro with a configured emulator running.
 - **iOS:** scan the QR code using the Camera app, or press `i` in Metro on a Mac with a full Xcode installation and an iOS Simulator.
@@ -68,7 +70,7 @@ npm run android
 npm run ios
 ```
 
-These scripts use `expo run:android` and `expo run:ios` and generate native projects when needed. Generated `android/` and `ios/` folders are intentionally ignored; native configuration lives in `app.json`. For SDK 58's exact native toolchain requirements, see the [Expo SDK reference](https://docs.expo.dev/versions/v58.0.0/).
+These scripts use `expo run:android` and `expo run:ios` and generate native projects when needed. Generated `android/` and `ios/` folders are intentionally ignored; native configuration lives in `app.json`. For SDK 57's exact native toolchain requirements, see the [Expo SDK reference](https://docs.expo.dev/versions/v57.0.0/).
 
 An installed standalone build keeps the core recipe features available without a network. Expo Go and debug builds still need the development bundle/Metro when starting a development session. Nothing is published to an app store by these commands.
 
@@ -147,7 +149,7 @@ npx expo export --platform ios --output-dir dist/ios
 npx expo prebuild --no-install
 ```
 
-**Verified:** 33 tests in three suites, strict type checking, lint, formatting, Expo Doctor (20/20), Android/iOS bundle exports, and native project generation. Tests cover first initialization, restarts, empty collections, concurrent writes, failure recovery, corruption, photo copying, filtering, form interaction, delete confirmation, and application-shell navigation.
+**Verified:** 33 tests in three suites, strict type checking, lint, formatting, Expo Doctor (21/21), Android/iOS bundle exports, and native project generation. Tests cover first initialization, restarts, empty collections, concurrent writes, failure recovery, corruption, photo copying, filtering, form interaction, delete confirmation, and application-shell navigation.
 
 Native modules and gallery responses are mocked in automated tests. **No physical-device, emulator, simulator, signed-binary, or native compilation test was performed.** This environment has only Xcode command-line tools and no Android SDK/emulator. See [docs/QA.md](docs/QA.md) for the scenario-by-scenario evidence and remaining device checks. Bundle export and prebuild are not substitutes for a native build or device test.
 
