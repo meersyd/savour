@@ -67,7 +67,7 @@ export function AddEditRecipeScreen({
   async function save(input: RecipeInput) {
     let ownedUri: string | undefined;
     try {
-      ownedUri = persistRecipeImage(input.imageUri);
+      ownedUri = await persistRecipeImage(input.imageUri);
       const next = { ...input, imageUri: ownedUri };
       if (recipeId) {
         await updateRecipe(recipeId, next);

@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   photo: { borderRadius: 18, overflow: 'hidden', backgroundColor: colors.pale, marginBottom: 12 },
-  preview: { width: '100%', aspectRatio: 1.6 },
+  preview: { width: '100%', height: 160 },
   photoPrompt: {
     padding: 28,
     minHeight: 180,

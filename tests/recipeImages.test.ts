@@ -8,6 +8,7 @@ const mockDisk = {
   files: new Map<string, number>(),
   failCopy: false,
   root: 'file:///documents',
+  copyGate: null as Promise<void> | null,
 };
 jest.mock('expo-crypto', () => ({ randomUUID: () => 'unique-photo-id' }));
 jest.mock('expo-file-system', () => {
@@ -32,7 +33,8 @@ jest.mock('expo-file-system', () => {
     get extension() {
       return '.jpg';
     }
-    copy(destination: File) {
+    async copy(destination: File) {
+      await mockDisk.copyGate;
       if (mockDisk.failCopy) throw new Error('Copy failed');
       mockDisk.files.set(destination.uri, this.size);
     }
@@ -54,11 +56,12 @@ describe('permanent recipe photos', () => {
   beforeEach(() => {
     mockDisk.files.clear();
     mockDisk.failCopy = false;
+    mockDisk.copyGate = null;
     mockDisk.root = 'file:///documents';
   });
-  it('copies a picker photo into documents and returns a relative reference', () => {
+  it('copies a picker photo into documents and returns a relative reference', async () => {
     mockDisk.files.set('file:///cache/picker.jpg', 120);
-    const uri = persistRecipeImage('file:///cache/picker.jpg');
+    const uri = await persistRecipeImage('file:///cache/picker.jpg');
     expect(uri).toBe('local:unique-photo-id.jpg');
     expect(mockDisk.files.get(resolveImageUri(uri))).toBe(120);
     mockDisk.files.delete('file:///cache/picker.jpg');
@@ -70,17 +73,18 @@ describe('permanent recipe photos', () => {
       'file:///new-sandbox/documents/recipe-images/unique-photo-id.jpg',
     );
   });
-  it('does not recopy bundled or existing owned images', () => {
-    expect(persistRecipeImage('sample:avocado-toast')).toBe('sample:avocado-toast');
-    expect(persistRecipeImage('local:existing.jpg')).toBe('local:existing.jpg');
+  it('does not recopy bundled or existing owned images', async () => {
+    await expect(persistRecipeImage('sample:avocado-toast')).resolves.toBe('sample:avocado-toast');
+    await expect(persistRecipeImage('local:existing.jpg')).resolves.toBe('local:existing.jpg');
     expect(mockDisk.files.size).toBe(0);
   });
-  it('rejects unavailable picker images', () =>
-    expect(() => persistRecipeImage('file:///missing.jpg')).toThrow('select it again'));
-  it('surfaces file copy failures', () => {
+  it('rejects unavailable picker images', async () => {
+    await expect(persistRecipeImage('file:///missing.jpg')).rejects.toThrow('select it again');
+  });
+  it('surfaces file copy failures', async () => {
     mockDisk.files.set('file:///cache/photo.jpg', 100);
     mockDisk.failCopy = true;
-    expect(() => persistRecipeImage('file:///cache/photo.jpg')).toThrow('Copy failed');
+    await expect(persistRecipeImage('file:///cache/photo.jpg')).rejects.toThrow('Copy failed');
   });
   it('removes only application-owned images', () => {
     mockDisk.files.set('file:///cache/other.jpg', 100);
@@ -92,4 +96,28 @@ describe('permanent recipe photos', () => {
   });
   it('prevents path traversal in stored references', () =>
     expect(() => resolveImageUri('local:../../outside.jpg')).toThrow('Invalid'));
+});
+
+describe('asynchronous photo copying', () => {
+  it('waits for the native copy before checking the file or returning a saved reference', async () => {
+    let finishCopy: () => void = () => undefined;
+    mockDisk.files.clear();
+    mockDisk.failCopy = false;
+    mockDisk.copyGate = new Promise<void>((resolve) => {
+      finishCopy = resolve;
+    });
+    mockDisk.files.set('file:///cache/delayed.jpg', 120);
+    let settled = false;
+    const pending = persistRecipeImage('file:///cache/delayed.jpg');
+    void pending.then(() => {
+      settled = true;
+    });
+    await Promise.resolve();
+    expect(settled).toBe(false);
+    expect(mockDisk.files.has(resolveImageUri('local:unique-photo-id.jpg'))).toBe(false);
+    finishCopy();
+    await expect(pending).resolves.toBe('local:unique-photo-id.jpg');
+    expect(mockDisk.files.get(resolveImageUri('local:unique-photo-id.jpg'))).toBe(120);
+    mockDisk.copyGate = null;
+  });
 });

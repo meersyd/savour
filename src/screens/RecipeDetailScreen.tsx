@@ -140,7 +140,7 @@ export function RecipeDetailScreen({
 }
 const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 800, alignSelf: 'center' },
-  hero: { width: '100%', aspectRatio: 1.35 },
+  hero: { width: '100%', height: 220 },
   body: { padding: 24, gap: 20 },
   category: { color: colors.primary, fontSize: 12, letterSpacing: 2, fontWeight: '700' },
   stats: {

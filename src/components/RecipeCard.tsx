@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
   },
-  image: { width: '100%', aspectRatio: 1.6 },
+  image: { width: '100%', height: 160 },
   content: { padding: 18, gap: 10 },
   category: { fontSize: 11, fontWeight: '800', letterSpacing: 1.6, color: colors.primary },
   title: { fontSize: 21, lineHeight: 27, fontWeight: '600', color: colors.text },

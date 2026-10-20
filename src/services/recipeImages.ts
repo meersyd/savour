@@ -12,7 +12,7 @@ export function resolveImageUri(uri: string): string {
   return new File(imageDirectory(), filename).uri;
 }
 /** Store a relative reference so an iOS sandbox path change does not break photos. */
-export function persistRecipeImage(uri: string): string {
+export async function persistRecipeImage(uri: string): Promise<string> {
   if (uri.startsWith('sample:') || uri.startsWith(PREFIX)) return uri;
   const directory = imageDirectory();
   directory.create({ intermediates: true, idempotent: true });
@@ -21,7 +21,7 @@ export function persistRecipeImage(uri: string): string {
   const extension = /^\.[a-zA-Z0-9]+$/.test(source.extension) ? source.extension : '.jpg';
   const filename = `${randomUUID()}${extension}`;
   const destination = new File(directory, filename);
-  source.copy(destination);
+  await source.copy(destination);
   if (!destination.exists || destination.size === 0)
     throw new Error('The photo could not be saved. Please try again.');
   return `${PREFIX}${filename}`;

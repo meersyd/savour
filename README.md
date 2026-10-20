@@ -149,7 +149,7 @@ npx expo export --platform ios --output-dir dist/ios
 npx expo prebuild --no-install
 ```
 
-**Verified:** 33 tests in three suites, strict type checking, lint, formatting, Expo Doctor (21/21), Android/iOS bundle exports, and native project generation. Tests cover first initialization, restarts, empty collections, concurrent writes, failure recovery, corruption, photo copying, filtering, form interaction, delete confirmation, and application-shell navigation.
+**Verified:** 34 tests in three suites, strict type checking, lint, formatting, Expo Doctor (21/21), Android/iOS bundle exports, and native project generation. Tests cover first initialization, restarts, empty collections, concurrent writes, failure recovery, corruption, photo copying, filtering, form interaction, delete confirmation, and application-shell navigation.
 
 Native modules and gallery responses are mocked in automated tests. **No physical-device, emulator, simulator, signed-binary, or native compilation test was performed.** This environment has only Xcode command-line tools and no Android SDK/emulator. See [docs/QA.md](docs/QA.md) for the scenario-by-scenario evidence and remaining device checks. Bundle export and prebuild are not substitutes for a native build or device test.
 
