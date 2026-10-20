@@ -108,16 +108,16 @@ The provider publishes a new collection only after persistence succeeds. `useRec
 
 `src/data/sampleRecipes.json` contains Nasi Lemak, Nasi Ayam, Char Kuey Teow, Kuih Seri Muka, Cucur Udang, and Teh Tarik spanning the six categories. Each `categoryId` matches the category JSON. Bundled image references use `sample:<id>` and are resolved through static image imports in `src/utils/images.ts`. Photography provenance notes are in [assets/images/CREDITS.md](assets/images/CREDITS.md).
 
-Fresh installations seed the Malaysian recipes when the storage key is absent. A one-time `malaysian-v1` catalog migration also updates installations that still contain the original starter IDs: it replaces only exact, untouched old samples, adds missing Malaysian recipes, and preserves personal recipes and edited samples. The historical records in `src/data/legacyStarterRecipes.json` are used only for this comparison, never for new seeding.
+Fresh installations seed the six Malaysian recipes when the storage key is absent. The user-confirmed one-time `malaysian-v2` reset also replaces every valid pre-reset collection with exactly these six recipes, removing all previous entries, including edited samples and personal additions. The old records in `src/data/legacyStarterRecipes.json` are regression-test fixtures only; they are never seeded.
 
-The catalog marker is saved atomically with the migrated collection. Deleted recipes are not restored after migration, empty collections stay empty, and collections already using the Malaysian starters are not reseeded. Edited old samples with a removed bundled photo remain editable and show a photo-unavailable fallback until a replacement is selected.
+The new catalog marker and collection are saved in a single write. Once this reset completes, normal CRUD resumes: newly added recipes and edits persist, and deleted recipes are not restored.
 
 ## Persistence and CRUD
 
 The AsyncStorage key `@savour/recipes/v1` stores a versioned envelope:
 
 ```json
-{ "version": 1, "starterCatalog": "malaysian-v1", "recipes": [] }
+{ "version": 1, "starterCatalog": "malaysian-v2", "recipes": [] }
 ```
 
 - **Create:** validate the draft, copy a selected image into documents, generate a UUID and timestamps, then persist and publish the new collection.
@@ -151,7 +151,7 @@ npx expo export --platform ios --output-dir dist/ios
 npx expo prebuild --no-install
 ```
 
-**Verified:** 47 tests in four suites, strict type checking, lint, formatting, Expo Doctor (21/21), Android/iOS bundle exports, and native project generation. Tests cover first initialization, restarts, empty collections, concurrent writes, failure recovery, corruption, photo copying, filtering, form interaction, delete confirmation, and application-shell navigation.
+**Verified:** 49 tests in four suites, strict type checking, lint, formatting, Expo Doctor (21/21), Android/iOS bundle exports, and native project generation. Tests cover first initialization, restarts, empty collections, concurrent writes, failure recovery, corruption, photo copying, filtering, form interaction, delete confirmation, and application-shell navigation.
 
 Native modules and gallery responses are mocked in automated tests. **No physical-device, emulator, simulator, signed-binary, or native compilation test was performed.** This environment has only Xcode command-line tools and no Android SDK/emulator. See [docs/QA.md](docs/QA.md) for the scenario-by-scenario evidence and remaining device checks. Bundle export and prebuild are not substitutes for a native build or device test.
 

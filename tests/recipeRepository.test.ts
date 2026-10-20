@@ -137,14 +137,14 @@ it('rejects corrupt image paths without exposing them to the renderer', async ()
   expect(s.raw()).toBe(raw);
 });
 
-it('preserves saved recipes whose bundled photo was retired', async () => {
+it('preserves subsequent user changes after the one-time reset', async () => {
   const saved = {
     ...samples[0],
     id: 'avocado-toast',
     name: 'My edited toast',
     imageUri: 'sample:avocado-toast',
   };
-  const raw = JSON.stringify({ version: 1, recipes: [saved] });
+  const raw = JSON.stringify({ version: 1, starterCatalog: 'malaysian-v2', recipes: [saved] });
   const s = setup(raw);
   expect(await s.repo.load()).toContainEqual(saved);
   await s.repo.update(saved.id, { ...saved, description: 'Still editable' });
@@ -157,10 +157,10 @@ describe('one-time Malaysian starter update', () => {
   it('replaces the untouched old collection with the six Malaysian dishes', async () => {
     const s = setup(JSON.stringify({ version: 1, recipes: legacySamples }));
     expect(await s.repo.load()).toEqual(samples);
-    expect(JSON.parse(s.raw()!).starterCatalog).toBe('malaysian-v1');
+    expect(JSON.parse(s.raw()!).starterCatalog).toBe('malaysian-v2');
     expect(await new RecipeRepository(s.storage, () => 'x').load()).toEqual(samples);
   });
-  it('preserves personal recipes, edited old samples, and existing Malaysian edits', async () => {
+  it('resets the previous mixed collection to exactly six dishes as confirmed by the user', async () => {
     const edited = { ...legacySamples[0], name: 'My toast' };
     const personal = {
       ...samples[0],
@@ -170,14 +170,18 @@ describe('one-time Malaysian starter update', () => {
     };
     const nasi = { ...samples[0], name: 'My nasi lemak' };
     const s = setup(
-      JSON.stringify({ version: 1, recipes: [edited, ...legacySamples.slice(1), personal, nasi] }),
+      JSON.stringify({
+        version: 1,
+        starterCatalog: 'malaysian-v1',
+        recipes: [edited, ...legacySamples.slice(1), personal, nasi],
+      }),
     );
     const migrated = await s.repo.load();
-    expect(migrated).toHaveLength(8);
-    expect(migrated).toEqual(expect.arrayContaining([edited, personal, nasi]));
+    expect(migrated).toHaveLength(6);
+    expect(migrated).toEqual(samples);
     expect(migrated.filter((recipe) => recipe.id === nasi.id)).toHaveLength(1);
   });
-  it('does not restore Malaysian recipes deleted after migration, even with an edited old sample remaining', async () => {
+  it('does not restore Malaysian recipes deleted after the reset', async () => {
     const edited = { ...legacySamples[0], name: 'My toast' };
     const s = setup(JSON.stringify({ version: 1, recipes: [edited] }));
     await s.repo.load();
@@ -186,9 +190,13 @@ describe('one-time Malaysian starter update', () => {
     expect((await restarted.load()).some((recipe) => recipe.id === 'nasi-lemak')).toBe(false);
   });
   it('keeps an empty collection empty and does not reseed a newer collection with a deleted starter', async () => {
-    const empty = setup(JSON.stringify({ version: 1, recipes: [] }));
+    const empty = setup(
+      JSON.stringify({ version: 1, starterCatalog: 'malaysian-v2', recipes: [] }),
+    );
     expect(await empty.repo.load()).toEqual([]);
-    const current = setup(JSON.stringify({ version: 1, recipes: samples.slice(1) }));
+    const current = setup(
+      JSON.stringify({ version: 1, starterCatalog: 'malaysian-v2', recipes: samples.slice(1) }),
+    );
     expect(await current.repo.load()).toEqual(samples.slice(1));
   });
   it('leaves the old collection untouched if migration cannot be saved, then retries safely', async () => {
@@ -200,4 +208,24 @@ describe('one-time Malaysian starter update', () => {
     s.fail(false);
     expect(await s.repo.load()).toEqual(samples);
   });
+});
+
+it('keeps recipes added or edited after the reset across restarts', async () => {
+  const s = setup(
+    JSON.stringify({ version: 1, starterCatalog: 'malaysian-v1', recipes: legacySamples }),
+  );
+  await s.repo.load();
+  await s.repo.create({ ...samples[0], name: 'My new recipe' });
+  await s.repo.update(samples[0].id, { ...samples[0], name: 'My nasi lemak' });
+  const recipes = await new RecipeRepository(s.storage, () => 'x').load();
+  expect(recipes).toHaveLength(7);
+  expect(recipes.some((recipe) => recipe.name === 'My new recipe')).toBe(true);
+  expect(recipes.some((recipe) => recipe.name === 'My nasi lemak')).toBe(true);
+});
+
+it('applies the confirmed reset to a pre-reset collection without legacy recipe IDs', async () => {
+  const s = setup(
+    JSON.stringify({ version: 1, recipes: [{ ...samples[0], id: 'personal-dish' }] }),
+  );
+  expect(await s.repo.load()).toEqual(samples);
 });
