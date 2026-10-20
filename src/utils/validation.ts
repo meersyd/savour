@@ -1,4 +1,3 @@
-import samples from '../data/sampleRecipes.json';
 import categories from '../data/recipetypes.json';
 import type { FormErrors, Recipe, RecipeFormValues, RecipeInput } from '../types/recipe';
 export function validateRecipe(values: RecipeFormValues): FormErrors {
@@ -30,11 +29,9 @@ export function toRecipeInput(values: RecipeFormValues): RecipeInput {
     servings: Number(values.servings),
   };
 }
+// Retired bundled photos must not make an existing saved collection unreadable.
 export function isStoredImageReference(uri: string): boolean {
-  return (
-    samples.some((recipe) => recipe.imageUri === uri) ||
-    /^local:[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$/.test(uri)
-  );
+  return /^sample:[a-z0-9-]+$/.test(uri) || /^local:[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$/.test(uri);
 }
 export function isRecipe(value: unknown): value is Recipe {
   if (!value || typeof value !== 'object') return false;

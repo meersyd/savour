@@ -135,3 +135,18 @@ it('rejects corrupt image paths without exposing them to the renderer', async ()
   await expect(s.repo.load()).rejects.toThrow('damaged format');
   expect(s.raw()).toBe(raw);
 });
+
+it('preserves saved recipes whose bundled photo was retired', async () => {
+  const saved = {
+    ...samples[0],
+    id: 'avocado-toast',
+    name: 'My edited toast',
+    imageUri: 'sample:avocado-toast',
+  };
+  const raw = JSON.stringify({ version: 1, recipes: [saved] });
+  const s = setup(raw);
+  expect(await s.repo.load()).toEqual([saved]);
+  expect(s.raw()).toBe(raw);
+  await s.repo.update(saved.id, { ...saved, description: 'Still editable' });
+  expect((await s.repo.load())[0].description).toBe('Still editable');
+});

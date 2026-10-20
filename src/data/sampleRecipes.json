@@ -1,152 +1,182 @@
 [
   {
-    "id": "avocado-toast",
-    "name": "Avocado & egg toast",
+    "id": "nasi-lemak",
+    "name": "Nasi Lemak",
     "categoryId": "breakfast",
-    "description": "A little crunch, a creamy avocado, and a sunny start to the day.",
-    "imageUri": "sample:avocado-toast",
+    "description": "Fragrant coconut rice served with spicy sambal, crispy anchovies, peanuts, cucumber and boiled eggs.",
+    "imageUri": "sample:nasi-lemak",
     "ingredients": [
-      "2 slices sourdough bread",
-      "1 ripe avocado",
+      "2 cups white rice",
+      "200 ml coconut milk",
+      "1 cup water",
+      "2 pandan leaves",
       "2 eggs",
-      "1 tsp lemon juice",
-      "Chilli flakes, salt and pepper"
-    ],
-    "steps": [
-      "Toast the sourdough until golden and crisp.",
-      "Mash avocado with lemon juice and a pinch of salt.",
-      "Fry eggs in a lightly oiled pan until the whites are set.",
-      "Spread avocado over toast, top with eggs and finish with chilli flakes."
-    ],
-    "prepTime": 10,
-    "cookTime": 5,
-    "servings": 2,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
-  },
-  {
-    "id": "summer-salad",
-    "name": "Garden harvest bowl",
-    "categoryId": "lunch",
-    "description": "A fresh, colourful bowl with a bright lemon dressing.",
-    "imageUri": "sample:summer-salad",
-    "ingredients": [
-      "120 g mixed salad leaves",
       "1 cucumber, sliced",
-      "200 g cherry tomatoes, halved",
-      "100 g feta cheese",
-      "2 tbsp olive oil",
-      "1 tbsp lemon juice"
+      "50 g dried anchovies",
+      "50 g roasted peanuts",
+      "4 tbsp sambal",
+      "Salt to taste"
     ],
     "steps": [
-      "Wash and dry the salad leaves.",
-      "Combine leaves, cucumber and tomatoes in a large bowl.",
-      "Whisk olive oil and lemon juice; season to taste.",
-      "Toss gently with the dressing and crumble feta over the top."
+      "Rinse rice and cook with coconut milk, water, pandan leaves and a pinch of salt until fluffy.",
+      "Boil eggs for 9–10 minutes, peel and cut in half.",
+      "Fry dried anchovies until crispy and golden.",
+      "Prepare or heat the sambal in a small pan.",
+      "Serve coconut rice with sambal, eggs, cucumber, anchovies and peanuts."
     ],
     "prepTime": 15,
-    "cookTime": 0,
+    "cookTime": 30,
     "servings": 2,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
+    "createdAt": "2026-10-20T00:00:00.000Z",
+    "updatedAt": "2026-10-20T00:00:00.000Z"
   },
   {
-    "id": "tomato-pasta",
-    "name": "Slow Sunday tomato pasta",
+    "id": "nasi-ayam",
+    "name": "Nasi Ayam",
+    "categoryId": "lunch",
+    "description": "Tender chicken with fragrant garlic and ginger rice, served with cucumber and spicy chilli sauce.",
+    "imageUri": "sample:nasi-ayam",
+    "ingredients": [
+      "2 chicken thighs",
+      "2 cups jasmine rice",
+      "3 cloves garlic, minced",
+      "2 cm ginger, sliced",
+      "2 cups chicken stock",
+      "1 tbsp soy sauce",
+      "1 tbsp sesame oil",
+      "1 cucumber, sliced",
+      "2 tbsp chilli sauce",
+      "Salt and pepper to taste"
+    ],
+    "steps": [
+      "Season chicken with salt and pepper, then simmer in water until fully cooked.",
+      "Remove chicken and reserve the cooking broth as chicken stock.",
+      "Saute garlic and ginger in sesame oil, then add washed rice and chicken stock.",
+      "Cook rice until fluffy and fragrant.",
+      "Brush chicken with soy sauce and serve with rice, cucumber and chilli sauce."
+    ],
+    "prepTime": 20,
+    "cookTime": 35,
+    "servings": 2,
+    "createdAt": "2026-10-20T00:00:00.000Z",
+    "updatedAt": "2026-10-20T00:00:00.000Z"
+  },
+  {
+    "id": "char-kuey-teow",
+    "name": "Char Kuey Teow",
     "categoryId": "dinner",
-    "description": "Sweet tomatoes, fragrant basil, and a generous tangle of pasta.",
-    "imageUri": "sample:tomato-pasta",
+    "description": "Smoky stir-fried flat rice noodles with prawns, eggs, bean sprouts and savoury sauces.",
+    "imageUri": "sample:char-kuey-teow",
     "ingredients": [
-      "250 g spaghetti",
-      "400 g chopped tomatoes",
-      "2 garlic cloves, sliced",
-      "2 tbsp olive oil",
-      "A handful of fresh basil",
-      "30 g grated Parmesan"
+      "400 g flat rice noodles",
+      "150 g prawns, peeled",
+      "2 eggs",
+      "100 g bean sprouts",
+      "2 cloves garlic, minced",
+      "2 tbsp light soy sauce",
+      "1 tbsp dark soy sauce",
+      "1 tbsp chilli paste",
+      "2 tbsp cooking oil",
+      "2 stalks Chinese chives, chopped"
     ],
     "steps": [
-      "Warm olive oil in a pan and gently cook garlic for one minute.",
-      "Add tomatoes and simmer for 20 minutes, stirring occasionally.",
-      "Cook spaghetti in salted water according to the package instructions. Reserve a cup of cooking water.",
-      "Toss pasta with sauce, loosening with a splash of cooking water. Finish with basil and Parmesan."
+      "Heat cooking oil in a wok over high heat and saute garlic until fragrant.",
+      "Add prawns and stir-fry until cooked through.",
+      "Push prawns aside, crack in eggs and scramble lightly.",
+      "Add flat rice noodles, soy sauces and chilli paste, tossing quickly.",
+      "Add bean sprouts and Chinese chives, stir-fry briefly and serve hot."
     ],
-    "prepTime": 10,
-    "cookTime": 25,
-    "servings": 3,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
+    "prepTime": 15,
+    "cookTime": 10,
+    "servings": 2,
+    "createdAt": "2026-10-20T00:00:00.000Z",
+    "updatedAt": "2026-10-20T00:00:00.000Z"
   },
   {
-    "id": "berry-pancakes",
-    "name": "Berry breakfast pancakes",
+    "id": "kuih-seri-muka",
+    "name": "Kuih Seri Muka",
     "categoryId": "dessert",
-    "description": "Fluffy little pancakes with berries and a drizzle of maple syrup.",
-    "imageUri": "sample:berry-pancakes",
+    "description": "A traditional two-layer Malaysian kuih combining soft coconut glutinous rice with smooth pandan custard.",
+    "imageUri": "sample:kuih-seri-muka",
     "ingredients": [
-      "150 g plain flour",
-      "1 tsp baking powder",
-      "1 egg",
-      "180 ml milk",
-      "100 g mixed berries",
-      "Maple syrup, to serve"
+      "200 g glutinous rice, soaked for 3 hours",
+      "150 ml coconut milk for rice layer",
+      "100 ml water",
+      "1/2 tsp salt",
+      "3 eggs",
+      "150 ml coconut milk for custard",
+      "100 ml pandan juice",
+      "100 g sugar",
+      "50 g all-purpose flour"
     ],
     "steps": [
-      "Whisk flour and baking powder together.",
-      "Beat egg with milk, then stir into the dry ingredients until just combined.",
-      "Spoon batter into a lightly greased pan over medium heat.",
-      "Flip when bubbles appear and cook for another minute. Serve with berries and maple syrup."
+      "Drain soaked glutinous rice and mix with coconut milk, water and salt.",
+      "Steam rice for 25–30 minutes until tender, then press firmly into a greased square pan.",
+      "Whisk eggs, coconut milk, pandan juice, sugar and flour until smooth, then strain.",
+      "Pour pandan custard over the rice layer and steam gently for 25–30 minutes until set.",
+      "Cool completely before slicing into neat squares."
     ],
-    "prepTime": 10,
-    "cookTime": 15,
-    "servings": 4,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
+    "prepTime": 20,
+    "cookTime": 60,
+    "servings": 8,
+    "createdAt": "2026-10-20T00:00:00.000Z",
+    "updatedAt": "2026-10-20T00:00:00.000Z"
   },
   {
-    "id": "chocolate-shake",
-    "name": "Chocolate afternoon shake",
+    "id": "cucur-udang",
+    "name": "Cucur Udang",
     "categoryId": "snack",
-    "description": "A rich cocoa treat, topped with softly whipped cream.",
-    "imageUri": "sample:chocolate-shake",
+    "description": "Crispy golden prawn fritters packed with fresh vegetables and served with sweet chilli sauce.",
+    "imageUri": "sample:cucur-udang",
     "ingredients": [
-      "200 ml milk",
-      "2 scoops vanilla ice cream",
-      "1 tbsp cocoa powder",
-      "1 tsp chocolate syrup",
-      "2 tbsp whipped cream"
+      "200 g all-purpose flour",
+      "150 g small prawns, cleaned",
+      "100 g bean sprouts",
+      "1 small carrot, shredded",
+      "2 stalks spring onions, chopped",
+      "1 egg",
+      "180 ml water",
+      "1/2 tsp turmeric powder",
+      "1/2 tsp salt",
+      "Cooking oil for frying"
     ],
     "steps": [
-      "Blend milk, ice cream and cocoa until smooth.",
-      "Drizzle chocolate syrup inside a chilled glass.",
-      "Pour in the shake and top with whipped cream. Serve immediately."
+      "Combine flour, turmeric powder and salt in a mixing bowl.",
+      "Add egg and water gradually, stirring until a thick batter forms.",
+      "Fold in prawns, bean sprouts, carrot and spring onions.",
+      "Heat cooking oil and carefully drop spoonfuls of batter into the pan.",
+      "Fry until golden brown and cooked through, then drain and serve with chilli sauce."
     ],
-    "prepTime": 5,
-    "cookTime": 0,
-    "servings": 1,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 4,
+    "createdAt": "2026-10-20T00:00:00.000Z",
+    "updatedAt": "2026-10-20T00:00:00.000Z"
   },
   {
-    "id": "iced-latte",
-    "name": "Maple iced latte",
+    "id": "teh-tarik",
+    "name": "Teh Tarik",
     "categoryId": "beverage",
-    "description": "Your afternoon pause: mellow coffee, cold milk, and a hint of maple.",
-    "imageUri": "sample:iced-latte",
+    "description": "Malaysia's iconic pulled milk tea, known for its rich flavour, creamy sweetness and frothy top.",
+    "imageUri": "sample:teh-tarik",
     "ingredients": [
-      "60 ml espresso, cooled",
-      "180 ml milk or oat milk",
-      "1 tsp maple syrup",
-      "A handful of ice cubes"
+      "2 tbsp black tea leaves",
+      "400 ml water",
+      "4 tbsp sweetened condensed milk",
+      "2 tbsp evaporated milk",
+      "Sugar to taste (optional)"
     ],
     "steps": [
-      "Stir maple syrup into the cooled espresso.",
-      "Fill a tall glass with ice and pour in the milk.",
-      "Pour the coffee slowly over the milk, stir, and enjoy."
+      "Bring water to a boil and steep black tea leaves for 4–5 minutes.",
+      "Strain the brewed tea into a heat-resistant jug.",
+      "Add condensed milk and evaporated milk, then stir until combined.",
+      "Carefully pour tea back and forth between two heat-resistant jugs to create a frothy texture.",
+      "Serve immediately while hot."
     ],
     "prepTime": 5,
-    "cookTime": 0,
-    "servings": 1,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
+    "cookTime": 5,
+    "servings": 2,
+    "createdAt": "2026-10-20T00:00:00.000Z",
+    "updatedAt": "2026-10-20T00:00:00.000Z"
   }
 ]

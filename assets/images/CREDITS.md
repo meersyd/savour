@@ -1,12 +1,12 @@
-# Bundled photography
+# Bundled recipe photography
 
-Downloaded from Unsplash for offline display. Source photo URLs:
+The following photographs were supplied by the project owner for the Malaysian starter recipes and are bundled for offline display:
 
-- avocado-toast: https://images.unsplash.com/photo-1525351484163-7529414344d8
-- summer-salad: https://images.unsplash.com/photo-1512621776951-a57141f2eefd
-- tomato-pasta: https://images.unsplash.com/photo-1473093295043-cdd812d0e601
-- berry-pancakes: https://images.unsplash.com/photo-1528207776546-365bb710ee93
-- chocolate-shake: https://images.unsplash.com/photo-1577805947697-89e18249d767
-- iced-latte: https://images.unsplash.com/photo-1461023058943-07fcbe16d735
+- `nasi-lemak.jpeg` — Nasi Lemak
+- `nasi-ayam.jpeg` — Nasi Ayam
+- `char-kuey-teow.jpeg` — Char Kuey Teow
+- `kuih-seri-muka.jpeg` — Kuih Seri Muka
+- `cucur-udang.jpeg` — Cucur Udang
+- `teh-tarik.jpeg` — Teh Tarik
 
-License: https://unsplash.com/license
+Original source URLs, photographer names, and licence details were not supplied. The previous Unsplash credits applied to the removed photos and do not describe these replacement assets.

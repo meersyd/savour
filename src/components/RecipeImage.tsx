@@ -13,7 +13,8 @@ export function RecipeImage({
   style?: StyleProp<ImageStyle>;
 }) {
   const [failedUri, setFailedUri] = useState<string | null>(null);
-  if (!uri || failedUri === uri)
+  const source = recipeImage(uri);
+  if (!source || failedUri === uri)
     return (
       <View accessibilityLabel={`${label}: photo unavailable`} style={[style, styles.fallback]}>
         <Ionicons name="restaurant-outline" color={colors.primary} size={32} />
@@ -22,7 +23,7 @@ export function RecipeImage({
     );
   return (
     <Image
-      source={recipeImage(uri)}
+      source={source}
       accessibilityLabel={label}
       style={style}
       resizeMode="cover"

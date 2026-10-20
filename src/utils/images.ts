@@ -1,13 +1,15 @@
 import { resolveImageUri } from '../services/recipeImages';
 import type { ImageSourcePropType } from 'react-native';
 const sampleImages: Record<string, ImageSourcePropType> = {
-  'sample:avocado-toast': require('../../assets/images/avocado-toast.jpg'),
-  'sample:summer-salad': require('../../assets/images/summer-salad.jpg'),
-  'sample:tomato-pasta': require('../../assets/images/tomato-pasta.jpg'),
-  'sample:berry-pancakes': require('../../assets/images/berry-pancakes.jpg'),
-  'sample:chocolate-shake': require('../../assets/images/chocolate-shake.jpg'),
-  'sample:iced-latte': require('../../assets/images/iced-latte.jpg'),
+  'sample:nasi-lemak': require('../../assets/images/nasi-lemak.jpeg'),
+  'sample:nasi-ayam': require('../../assets/images/nasi-ayam.jpeg'),
+  'sample:char-kuey-teow': require('../../assets/images/char-kuey-teow.jpeg'),
+  'sample:kuih-seri-muka': require('../../assets/images/kuih-seri-muka.jpeg'),
+  'sample:cucur-udang': require('../../assets/images/cucur-udang.jpeg'),
+  'sample:teh-tarik': require('../../assets/images/teh-tarik.jpeg'),
 };
-export function recipeImage(uri: string): ImageSourcePropType {
-  return sampleImages[uri] ?? { uri: resolveImageUri(uri) };
+export function recipeImage(uri: string): ImageSourcePropType | undefined {
+  if (!uri) return undefined;
+  if (uri.startsWith('sample:')) return sampleImages[uri];
+  return { uri: resolveImageUri(uri) };
 }

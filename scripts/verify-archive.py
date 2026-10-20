@@ -21,6 +21,6 @@ with zipfile.ZipFile(archive) as source:
         if not item.is_dir():
             files.add(str(relative))
     assert required.issubset(files), f"Missing required files: {required - files}"
-    assert len([p for p in files if p.startswith("assets/images/") and p.endswith(".jpg")]) >= 6
+    assert len([p for p in files if p.startswith("assets/images/") and p.endswith((".jpg", ".jpeg", ".png"))]) >= 6
 print(f"Verified {len(files)} source files; archive size {archive.stat().st_size:,} bytes")
 print(f"SHA-256: {hashlib.sha256(archive.read_bytes()).hexdigest()}")
