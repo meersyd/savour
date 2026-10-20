@@ -1,0 +1,152 @@
+[
+  {
+    "id": "avocado-toast",
+    "name": "Avocado & egg toast",
+    "categoryId": "breakfast",
+    "description": "A little crunch, a creamy avocado, and a sunny start to the day.",
+    "imageUri": "sample:avocado-toast",
+    "ingredients": [
+      "2 slices sourdough bread",
+      "1 ripe avocado",
+      "2 eggs",
+      "1 tsp lemon juice",
+      "Chilli flakes, salt and pepper"
+    ],
+    "steps": [
+      "Toast the sourdough until golden and crisp.",
+      "Mash avocado with lemon juice and a pinch of salt.",
+      "Fry eggs in a lightly oiled pan until the whites are set.",
+      "Spread avocado over toast, top with eggs and finish with chilli flakes."
+    ],
+    "prepTime": 10,
+    "cookTime": 5,
+    "servings": 2,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "summer-salad",
+    "name": "Garden harvest bowl",
+    "categoryId": "lunch",
+    "description": "A fresh, colourful bowl with a bright lemon dressing.",
+    "imageUri": "sample:summer-salad",
+    "ingredients": [
+      "120 g mixed salad leaves",
+      "1 cucumber, sliced",
+      "200 g cherry tomatoes, halved",
+      "100 g feta cheese",
+      "2 tbsp olive oil",
+      "1 tbsp lemon juice"
+    ],
+    "steps": [
+      "Wash and dry the salad leaves.",
+      "Combine leaves, cucumber and tomatoes in a large bowl.",
+      "Whisk olive oil and lemon juice; season to taste.",
+      "Toss gently with the dressing and crumble feta over the top."
+    ],
+    "prepTime": 15,
+    "cookTime": 0,
+    "servings": 2,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "tomato-pasta",
+    "name": "Slow Sunday tomato pasta",
+    "categoryId": "dinner",
+    "description": "Sweet tomatoes, fragrant basil, and a generous tangle of pasta.",
+    "imageUri": "sample:tomato-pasta",
+    "ingredients": [
+      "250 g spaghetti",
+      "400 g chopped tomatoes",
+      "2 garlic cloves, sliced",
+      "2 tbsp olive oil",
+      "A handful of fresh basil",
+      "30 g grated Parmesan"
+    ],
+    "steps": [
+      "Warm olive oil in a pan and gently cook garlic for one minute.",
+      "Add tomatoes and simmer for 20 minutes, stirring occasionally.",
+      "Cook spaghetti in salted water according to the package instructions. Reserve a cup of cooking water.",
+      "Toss pasta with sauce, loosening with a splash of cooking water. Finish with basil and Parmesan."
+    ],
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 3,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "berry-pancakes",
+    "name": "Berry breakfast pancakes",
+    "categoryId": "dessert",
+    "description": "Fluffy little pancakes with berries and a drizzle of maple syrup.",
+    "imageUri": "sample:berry-pancakes",
+    "ingredients": [
+      "150 g plain flour",
+      "1 tsp baking powder",
+      "1 egg",
+      "180 ml milk",
+      "100 g mixed berries",
+      "Maple syrup, to serve"
+    ],
+    "steps": [
+      "Whisk flour and baking powder together.",
+      "Beat egg with milk, then stir into the dry ingredients until just combined.",
+      "Spoon batter into a lightly greased pan over medium heat.",
+      "Flip when bubbles appear and cook for another minute. Serve with berries and maple syrup."
+    ],
+    "prepTime": 10,
+    "cookTime": 15,
+    "servings": 4,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "chocolate-shake",
+    "name": "Chocolate afternoon shake",
+    "categoryId": "snack",
+    "description": "A rich cocoa treat, topped with softly whipped cream.",
+    "imageUri": "sample:chocolate-shake",
+    "ingredients": [
+      "200 ml milk",
+      "2 scoops vanilla ice cream",
+      "1 tbsp cocoa powder",
+      "1 tsp chocolate syrup",
+      "2 tbsp whipped cream"
+    ],
+    "steps": [
+      "Blend milk, ice cream and cocoa until smooth.",
+      "Drizzle chocolate syrup inside a chilled glass.",
+      "Pour in the shake and top with whipped cream. Serve immediately."
+    ],
+    "prepTime": 5,
+    "cookTime": 0,
+    "servings": 1,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "iced-latte",
+    "name": "Maple iced latte",
+    "categoryId": "beverage",
+    "description": "Your afternoon pause: mellow coffee, cold milk, and a hint of maple.",
+    "imageUri": "sample:iced-latte",
+    "ingredients": [
+      "60 ml espresso, cooled",
+      "180 ml milk or oat milk",
+      "1 tsp maple syrup",
+      "A handful of ice cubes"
+    ],
+    "steps": [
+      "Stir maple syrup into the cooled espresso.",
+      "Fill a tall glass with ice and pour in the milk.",
+      "Pour the coffee slowly over the milk, stir, and enjoy."
+    ],
+    "prepTime": 5,
+    "cookTime": 0,
+    "servings": 1,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  }
+]

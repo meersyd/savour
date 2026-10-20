@@ -1,4 +1,5 @@
 import samples from '../data/sampleRecipes.json';
+import legacySamples from '../data/legacyStarterRecipes.json';
 import type { Recipe, RecipeInput } from '../types/recipe';
 import { isRecipe, isStoredImageReference, validateRecipe } from '../utils/validation';
 export const STORAGE_KEY = '@savour/recipes/v1';
@@ -46,10 +47,33 @@ export class RecipeRepository {
       throw new Error(
         'Your saved collection has an unsupported or damaged format. It has not been overwritten.',
       );
+    if (
+      !('starterCatalog' in parsed) &&
+      parsed.recipes.some((recipe) => legacySamples.some((old) => old.id === recipe.id))
+    ) {
+      // Replace only exact original samples. Edited samples and personal recipes survive.
+      const preserved = parsed.recipes.filter(
+        (recipe) =>
+          !legacySamples.some(
+            (old) =>
+              old.id === recipe.id &&
+              (Object.keys(old) as (keyof Recipe)[]).every(
+                (key) => JSON.stringify(old[key]) === JSON.stringify(recipe[key]),
+              ),
+          ),
+      );
+      const existingIds = new Set(preserved.map((recipe) => recipe.id));
+      const migrated = [...samples.filter((recipe) => !existingIds.has(recipe.id)), ...preserved];
+      await this.write(migrated);
+      return migrated;
+    }
     return parsed.recipes;
   }
   private async write(recipes: Recipe[]): Promise<void> {
-    await this.storage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, recipes }));
+    await this.storage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ version: 1, starterCatalog: 'malaysian-v1', recipes }),
+    );
   }
   private check(input: RecipeInput): void {
     const errors = validateRecipe({

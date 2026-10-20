@@ -7,7 +7,7 @@ Revalidated on 20 October 2026 using Node 24.22.0 and Expo SDK 57 after correcti
 - `npm run typecheck`: passed, TypeScript strict mode.
 - `npm run lint`: passed, no warnings.
 - `npm run format:check`: passed.
-- `npm test`: 42 tests passed in four Jest suites.
+- `npm test`: 47 tests passed in four Jest suites.
 - `npx expo-doctor`: 21/21 checks passed.
 - Android and iOS production bundle exports: passed.
 - `npx expo prebuild --no-install`: both native projects generated successfully.
@@ -40,6 +40,8 @@ Jest uses Expo's native mocks and React Native Testing Library. Repository tests
 | TypeScript                   | `tsc --noEmit` passes.                                                                                                               |
 
 A delayed native-copy regression test verifies that photo persistence waits for the file copy before checking the destination and returning its reference. Recipe image heights are bounded to 160 points in cards/editor previews and 220 points in details; physical-device visual confirmation remains pending.
+
+Migration tests verify replacement of untouched old samples, preservation of personal recipes and edited samples, no duplicates, no restoration of deleted starters, and safe retry after a failed migration write.
 
 The Malaysian starter update also verifies all six static image imports and preserves saved records whose old bundled photo was removed.
 

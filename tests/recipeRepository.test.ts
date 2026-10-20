@@ -5,6 +5,7 @@ import {
   type StorageAdapter,
 } from '../src/services/recipeRepository';
 import samples from '../src/data/sampleRecipes.json';
+import legacySamples from '../src/data/legacyStarterRecipes.json';
 import categories from '../src/data/recipetypes.json';
 import { isRecipe, validateRecipe } from '../src/utils/validation';
 function setup(initial?: string) {
@@ -145,8 +146,58 @@ it('preserves saved recipes whose bundled photo was retired', async () => {
   };
   const raw = JSON.stringify({ version: 1, recipes: [saved] });
   const s = setup(raw);
-  expect(await s.repo.load()).toEqual([saved]);
-  expect(s.raw()).toBe(raw);
+  expect(await s.repo.load()).toContainEqual(saved);
   await s.repo.update(saved.id, { ...saved, description: 'Still editable' });
-  expect((await s.repo.load())[0].description).toBe('Still editable');
+  expect((await s.repo.load()).find((recipe) => recipe.id === saved.id)?.description).toBe(
+    'Still editable',
+  );
+});
+
+describe('one-time Malaysian starter update', () => {
+  it('replaces the untouched old collection with the six Malaysian dishes', async () => {
+    const s = setup(JSON.stringify({ version: 1, recipes: legacySamples }));
+    expect(await s.repo.load()).toEqual(samples);
+    expect(JSON.parse(s.raw()!).starterCatalog).toBe('malaysian-v1');
+    expect(await new RecipeRepository(s.storage, () => 'x').load()).toEqual(samples);
+  });
+  it('preserves personal recipes, edited old samples, and existing Malaysian edits', async () => {
+    const edited = { ...legacySamples[0], name: 'My toast' };
+    const personal = {
+      ...samples[0],
+      id: 'my-recipe',
+      name: 'My dish',
+      imageUri: 'local:photo.jpg',
+    };
+    const nasi = { ...samples[0], name: 'My nasi lemak' };
+    const s = setup(
+      JSON.stringify({ version: 1, recipes: [edited, ...legacySamples.slice(1), personal, nasi] }),
+    );
+    const migrated = await s.repo.load();
+    expect(migrated).toHaveLength(8);
+    expect(migrated).toEqual(expect.arrayContaining([edited, personal, nasi]));
+    expect(migrated.filter((recipe) => recipe.id === nasi.id)).toHaveLength(1);
+  });
+  it('does not restore Malaysian recipes deleted after migration, even with an edited old sample remaining', async () => {
+    const edited = { ...legacySamples[0], name: 'My toast' };
+    const s = setup(JSON.stringify({ version: 1, recipes: [edited] }));
+    await s.repo.load();
+    await s.repo.delete('nasi-lemak');
+    const restarted = new RecipeRepository(s.storage, () => 'x');
+    expect((await restarted.load()).some((recipe) => recipe.id === 'nasi-lemak')).toBe(false);
+  });
+  it('keeps an empty collection empty and does not reseed a newer collection with a deleted starter', async () => {
+    const empty = setup(JSON.stringify({ version: 1, recipes: [] }));
+    expect(await empty.repo.load()).toEqual([]);
+    const current = setup(JSON.stringify({ version: 1, recipes: samples.slice(1) }));
+    expect(await current.repo.load()).toEqual(samples.slice(1));
+  });
+  it('leaves the old collection untouched if migration cannot be saved, then retries safely', async () => {
+    const raw = JSON.stringify({ version: 1, recipes: legacySamples });
+    const s = setup(raw);
+    s.fail(true);
+    await expect(s.repo.load()).rejects.toThrow('Disk full');
+    expect(s.raw()).toBe(raw);
+    s.fail(false);
+    expect(await s.repo.load()).toEqual(samples);
+  });
 });
